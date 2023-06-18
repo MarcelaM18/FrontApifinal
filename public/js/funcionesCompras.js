@@ -37,7 +37,7 @@ const validatefechaCompra = () => {
       return false;
     } else {
       
-      document.getElementById('texto').innerHTML = '';
+      document.getElementById('textoc').innerHTML = '';
       return true;
 
     }

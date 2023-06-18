@@ -168,10 +168,10 @@ app.get('/registrarCompra', (req, res) => {
 })
 
 app.get('/editarCompra', (req, res) => {
-    res.render('Compras/registrarCompra', { 
+    res.render('Compras/editarCompra', { 
         titulo : 'CosmeTIC',
         user_name : 'Julian Carreño', 
-        consecutivo: 'registrarCompra',
+        consecutivo: 'editarCompra',
         subtitulo:'Editar Compras'
     });
 })

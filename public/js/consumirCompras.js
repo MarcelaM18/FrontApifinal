@@ -80,17 +80,6 @@ function eliminarProducto(btn) {
   fila.parentNode.removeChild(fila);
 }
 
-/*/ Función para validar el formulario antes de enviar la solicitud de registro
-function validateForm() {
-  var proveedor = document.getElementById('proveedor').value;
-  var numFactura = document.getElementById('numFactura').value;
-  var fechaCompra = document.getElementById('fechaCompra').value;
-  var fechaRegistro = document.getElementById('fechaRegistro').value;*/
-
-  // Realiza aquí las validaciones necesarias y muestra los mensajes de error correspondientes
-  // ...
-
-
 // Función para registrar una compra
 function registrar() {
   console.log('Estoy en registar Compra')
@@ -175,15 +164,20 @@ const eliminar = (id) => {
     });
   }
 };
-
 // Resto del código
 const editar = (compra) => {
   var url = "/editarCompra?compra=" + encodeURIComponent(compra._id);
   window.location.href = url;
-};
+}
+
+
 
 const consultarCompra = (compra) => {
   console.log('Estoy en el consultar');
+  if (!compra) {
+    console.log('No se ha proporcionado el ID de la compra');
+    return;
+  }
   const url2 = url + '?id=' + compra.toString();
   fetch(url2 + "", {
     method: 'GET',
@@ -200,25 +194,30 @@ const consultarCompra = (compra) => {
         return;
       }
 
-      let compraDetalle = datosCompra.detalleCompra[0];
+      let compraDetalle = datosCompra.detalleCompra;
       console.log('Compra:', compraDetalle);
+      document.getElementById('id').value = datosCompra._id
       document.getElementById('proveedor').value = datosCompra.proveedor;
       document.getElementById('fechaCompra').value = datosCompra.fechaCompra;
       document.getElementById('fechaRegistro').value = datosCompra.fechaRegistro;
-      document.getElementById('estado').value = datosCompra.fechaRegistro;
-      document.getElementById('id').value = compraDetalle._id;
+      document.getElementById('estado').value = datosCompra.estado;
+      document.getElementById('numFactura').value = datosCompra.numFactura;
 
       // Actualizar detalle de la compra
       let detalleCompra = document.getElementById('detalleProductos');
-      //detalleCompra.innerHTML = ""; // Limpiar tabla de detalle de compra
+      detalleCompra.innerHTML = ""; // Limpiar tabla de detalle de compra
 
       // Recorrer los productos del detalle y agregarlos a la tabla
-      for (let i = 0; i < compraDetalle.detalle.length; i++) {
-        let producto = compraDetalle.detalle[i];
+      for (let i = 0; i < compraDetalle.length; i++) {
+        let producto = compraDetalle[i];
         let fila = document.createElement('tr');
 
+        let celdaIdProducto = document.createElement('td');
+        celdaIdProducto.textContent = producto._id; // Obtener el ID del producto
+        fila.appendChild(celdaIdProducto);
+
         let celdaProducto = document.createElement('td');
-        celdaProducto.textContent = producto.nombre;
+        celdaProducto.textContent = producto.producto;
         fila.appendChild(celdaProducto);
 
         let celdaCantidad = document.createElement('td');
@@ -244,11 +243,23 @@ const consultarCompra = (compra) => {
           editarProducto(producto);
         });
         celdaAcciones.appendChild(botonEditar);
+
+        let botonEliminar = document.createElement('button');
+          botonEliminar.textContent = 'Eliminar';
+          botonEliminar.addEventListener('click', () => {
+            eliminarProducto(producto._id);
+          });
+
+  celdaAcciones.appendChild(botonEliminar);
+
+
         fila.appendChild(celdaAcciones);
 
         detalleCompra.appendChild(fila);
       }
     });
+
+  
 }
 
 const actualizar = () => {
@@ -257,33 +268,36 @@ const actualizar = () => {
   let _proveedor = document.getElementById('proveedor').value;
   let _fechaCompra = document.getElementById('fechaCompra').value;
   let _fechaRegistro = document.getElementById('fechaRegistro').value;
-  
+  let _numFactura = document.getElementById('numFactura').value;
+  let _estado = document.getElementById('estado').value;
   // Actualizar detalle de la compra
   let detalleCompra = [];
   let filas = document.getElementById('detalleProductos').getElementsByTagName('tr');
   for (let i = 0; i < filas.length; i++) {
     let fila = filas[i];
     let celdas = fila.getElementsByTagName('td');
-    
+
     let producto = {
-      nombre: celdas[0].textContent,
+      producto: celdas[0].textContent,
       cantidad: celdas[1].textContent,
       precioCompra: celdas[2].textContent,
       precioVenta: celdas[3].textContent,
       categoria: celdas[4].textContent
     };
-    
+
     detalleCompra.push(producto);
   }
 
   let compra = {
     proveedor: _proveedor,
+    numFactura: _numFactura,
     fechaCompra: _fechaCompra,
     fechaRegistro: _fechaRegistro,
-    detalle: detalleCompra
+    estado: _estado,
+    detalleCompra: detalleCompra
   };
-  
-  console.log('estoy antes del fetch');
+
+  console.log('Estoy antes del fetch');
   fetch(url + `?id=${id}`, {
     method: 'PUT',
     mode: 'cors',
@@ -296,10 +310,65 @@ const actualizar = () => {
         // Volver a la página de compras
         alert(json.msg);
         window.location.href = "/compras";
-        console.log('estoy estoy adentro del then');
+        console.log('Estoy adentro del then');
+
+        // Calcular el nuevo total de la compra
+        let total = 0;
+        detalleCompra.forEach(producto => {
+          let cantidad = parseInt(producto.cantidad);
+          let precioCompra = parseFloat(producto.precioCompra);
+          total += cantidad * precioCompra;
+        });
+        // Actualizar el valor del total en el HTML
+        document.getElementById('totalCompra').textContent = total;
       }
     });
 };
+function guardarProducto() {
+  // Obtén los valores actualizados de los campos de edición
+  var productoId = producto._id.value;
+  var producto = document.getElementById("producto").value;
+  var cantidad = document.getElementById("cantidad").value;
+  var precioCompra = document.getElementById("precioCompra").value;
+  var precioVenta = document.getElementById("precioVenta").value;
+  var categoria = document.getElementById("categoria").value;
+
+  // Buscar el producto en la matriz o colección de productos por su ID
+  var productoEncontrado = null;
+  for (var i = 0; i < productos.length; i++) {
+    if (productos[i].id === productoId) {
+      productoEncontrado = productos[i];
+      break;
+    }
+  }
+  // Si se encuentra el producto, actualizar sus propiedades
+  if (productoEncontrado) {
+    productoEncontrado.producto = producto;
+    productoEncontrado.cantidad = cantidad;
+    productoEncontrado.precioCompra = precioCompra;
+    productoEncontrado.precioVenta = precioVenta;
+    productoEncontrado.categoria = categoria;
+
+    // Lógica para guardar los cambios del producto
+    // Puedes implementar aquí la funcionalidad que necesites
+    // Por ejemplo, podrías hacer una solicitud al servidor para actualizar los datos en la base de datos
+
+    // Limpiar los campos de edición después de guardar los cambios
+    document.getElementById("productoId").value = "";
+    document.getElementById("producto").value = "";
+    document.getElementById("cantidad").value = "";
+    document.getElementById("precioCompra").value = "";
+    document.getElementById("precioVenta").value = "";
+    document.getElementById("categoria").value = "";
+
+    // Mostrar mensaje de éxito o realizar acciones adicionales si es necesario
+    console.log("Cambios guardados con éxito.");
+  } else {
+    console.log("No se encontró el producto con el ID proporcionado.");
+  }
+}
+
+
 const editarProducto = (producto) => {
   // Obtener referencias a los elementos del formulario
   const productoInput = document.getElementById('producto');
@@ -315,7 +384,12 @@ const editarProducto = (producto) => {
 
   // Agregar botones de "Guardar" y "Eliminar" al formulario
   const accionesContainer = document.getElementById('acciones');
-  accionesContainer.innerHTML = '';
+  if (accionesContainer) {
+    accionesContainer.innerHTML = '';
+  } else {
+    console.error('El elemento con el id "acciones" no se encontró en el documento.');
+    return;
+  }
 
   const guardarBoton = document.createElement('button');
   guardarBoton.textContent = 'Guardar';
@@ -355,8 +429,28 @@ const editarProducto = (producto) => {
     eliminarBoton.textContent = 'Eliminar';
     eliminarBoton.addEventListener('click', () => {
       // Realizar la lógica para eliminar el producto
-      // Puedes implementar aquí la funcionalidad que necesites
+      const index = producto.detalleCompra.findIndex((detalle) => detalle._id === producto._id);
+      if (index !== -1) {
+        producto.detalleCompra.splice(index, 1);
+      }
+      // Puedes implementar aquí la funcionalidad adicional que necesites, como actualizar la base de datos
+
+      // Limpiar los campos del formulario
+      productoInput.value = '';
+      cantidadInput.value = '';
+      precioCompraInput.value = '';
+      precioVentaInput.value = '';
+
+      // Restaurar los botones de "Editar" y "Eliminar"
+      accionesContainer.innerHTML = '';
+      const editarBoton = document.createElement('button');
+      editarBoton.textContent = 'Editar';
+      editarBoton.addEventListener('click', () => {
+        editarProducto(producto);
+      });
+      accionesContainer.appendChild(editarBoton);
     });
+
     accionesContainer.appendChild(eliminarBoton);
   });
 
@@ -364,13 +458,14 @@ const editarProducto = (producto) => {
 };
 
 
+
 document.addEventListener("DOMContentLoaded", function () {
-  var url = window.location.href
+  var url = window.location.href;
 
   if (url.includes("/editarCompra")) {
-    var queryString = url.split('?')[1]
-    var params = new URLSearchParams(queryString)
-    var compra = params.get('compra')
-    consultarCompra(compra)
+    var queryString = url.split('?')[1];
+    var params = new URLSearchParams(queryString);
+    var compra = params.get('compra');
+    consultarCompra(compra);
   }
 });
