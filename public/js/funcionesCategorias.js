@@ -1,12 +1,7 @@
 const validateForm = () => {
   const validatecategoriaResult = validatecategoria();
 
-  if (validatecategoriaResult) {
-    registrar();
-    actualizar()
-  }
-
-  console.log("validate categoria ", validatecategoria);
+  console.log("validate categoria ", validatecategoriaResult);
 };
 
 const validatecategoria = () => {

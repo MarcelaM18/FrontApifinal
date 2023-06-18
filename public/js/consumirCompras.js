@@ -81,7 +81,7 @@ function eliminarProducto(btn) {
 }
 
 // Función para registrar una compra
-function registrar() {
+const  registrar =()=>{
   console.log('Estoy en registar Compra')
   var proveedor = document.getElementById('proveedor').value;
   var numFactura = document.getElementById('numFactura').value;
@@ -95,7 +95,7 @@ function registrar() {
   for (var i = 0; i < filas.length; i++) {
     var celdas = filas[i].getElementsByTagName('td');
     var producto = celdas[0].innerHTML;
-    var cantidad = parseInt(celdas[1].innerHTML);
+    var cantidad = parseInt(celdas[1].innerHTML); // Convertir a número entero
     var precioCompra = parseFloat(celdas[2].innerHTML);
     var precioVenta = parseFloat(celdas[3].innerHTML);
     var categoria = celdas[4].innerHTML;
@@ -171,7 +171,6 @@ const editar = (compra) => {
 }
 
 
-
 const consultarCompra = (compra) => {
   console.log('Estoy en el consultar');
   if (!compra) {
@@ -179,7 +178,7 @@ const consultarCompra = (compra) => {
     return;
   }
   const url2 = url + '?id=' + compra.toString();
-  fetch(url2 + "", {
+  fetch(url2+ "" ,{
     method: 'GET',
     mode: 'cors',
     headers: { "Content-type": "application/json; charset=UTF-8" }
@@ -212,10 +211,7 @@ const consultarCompra = (compra) => {
         let producto = compraDetalle[i];
         let fila = document.createElement('tr');
 
-        let celdaIdProducto = document.createElement('td');
-        celdaIdProducto.textContent = producto._id; // Obtener el ID del producto
-        fila.appendChild(celdaIdProducto);
-
+    
         let celdaProducto = document.createElement('td');
         celdaProducto.textContent = producto.producto;
         fila.appendChild(celdaProducto);
@@ -245,23 +241,18 @@ const consultarCompra = (compra) => {
         celdaAcciones.appendChild(botonEditar);
 
         let botonEliminar = document.createElement('button');
-          botonEliminar.textContent = 'Eliminar';
-          botonEliminar.addEventListener('click', () => {
-            eliminarProducto(producto._id);
-          });
+        botonEliminar.textContent = 'Eliminar';
+        botonEliminar.addEventListener('click', () => {
+          eliminarProducto(producto._id);
+        });
 
-  celdaAcciones.appendChild(botonEliminar);
-
-
+        celdaAcciones.appendChild(botonEliminar);
         fila.appendChild(celdaAcciones);
 
         detalleCompra.appendChild(fila);
       }
     });
-
-  
 }
-
 const actualizar = () => {
   console.log('Estoy en el actualizar');
   let id = document.getElementById('id').value;
@@ -270,6 +261,7 @@ const actualizar = () => {
   let _fechaRegistro = document.getElementById('fechaRegistro').value;
   let _numFactura = document.getElementById('numFactura').value;
   let _estado = document.getElementById('estado').value;
+
   // Actualizar detalle de la compra
   let detalleCompra = [];
   let filas = document.getElementById('detalleProductos').getElementsByTagName('tr');
@@ -324,139 +316,60 @@ const actualizar = () => {
       }
     });
 };
-function guardarProducto() {
+
+
+// Variable global para almacenar la referencia a la celda seleccionada
+let celdaSeleccionada = null;
+
+const guardarProducto = () => {
   // Obtén los valores actualizados de los campos de edición
-  var productoId = producto._id.value;
-  var producto = document.getElementById("producto").value;
-  var cantidad = document.getElementById("cantidad").value;
-  var precioCompra = document.getElementById("precioCompra").value;
-  var precioVenta = document.getElementById("precioVenta").value;
-  var categoria = document.getElementById("categoria").value;
+  const producto = document.getElementById("producto").value;
+  const cantidad = document.getElementById("cantidad").value;
+  const precioCompra = document.getElementById("precioCompra").value;
+  const precioVenta = document.getElementById("precioVenta").value;
+  const categoria = document.getElementById("categoria").value;
 
-  // Buscar el producto en la matriz o colección de productos por su ID
-  var productoEncontrado = null;
-  for (var i = 0; i < productos.length; i++) {
-    if (productos[i].id === productoId) {
-      productoEncontrado = productos[i];
-      break;
-    }
-  }
-  // Si se encuentra el producto, actualizar sus propiedades
-  if (productoEncontrado) {
-    productoEncontrado.producto = producto;
-    productoEncontrado.cantidad = cantidad;
-    productoEncontrado.precioCompra = precioCompra;
-    productoEncontrado.precioVenta = precioVenta;
-    productoEncontrado.categoria = categoria;
-
-    // Lógica para guardar los cambios del producto
-    // Puedes implementar aquí la funcionalidad que necesites
-    // Por ejemplo, podrías hacer una solicitud al servidor para actualizar los datos en la base de datos
-
-    // Limpiar los campos de edición después de guardar los cambios
-    document.getElementById("productoId").value = "";
-    document.getElementById("producto").value = "";
-    document.getElementById("cantidad").value = "";
-    document.getElementById("precioCompra").value = "";
-    document.getElementById("precioVenta").value = "";
-    document.getElementById("categoria").value = "";
-
-    // Mostrar mensaje de éxito o realizar acciones adicionales si es necesario
-    console.log("Cambios guardados con éxito.");
-  } else {
-    console.log("No se encontró el producto con el ID proporcionado.");
-  }
-}
-
-
-const editarProducto = (producto) => {
-  // Obtener referencias a los elementos del formulario
-  const productoInput = document.getElementById('producto');
-  const cantidadInput = document.getElementById('cantidad');
-  const precioCompraInput = document.getElementById('precioCompra');
-  const precioVentaInput = document.getElementById('precioVenta');
-
-  // Asignar los valores del producto seleccionado a los campos del formulario
-  productoInput.value = producto.producto;
-  cantidadInput.value = producto.cantidad;
-  precioCompraInput.value = producto.precioCompra;
-  precioVentaInput.value = producto.precioVenta;
-
-  // Agregar botones de "Guardar" y "Eliminar" al formulario
-  const accionesContainer = document.getElementById('acciones');
-  if (accionesContainer) {
-    accionesContainer.innerHTML = '';
-  } else {
-    console.error('El elemento con el id "acciones" no se encontró en el documento.');
+  if (!celdaSeleccionada) {
+    console.error('No se ha seleccionado una celda para editar.');
     return;
   }
 
-  const guardarBoton = document.createElement('button');
-  guardarBoton.textContent = 'Guardar';
-  guardarBoton.addEventListener('click', () => {
-    // Obtener los valores actualizados del formulario
-    const nuevoProducto = productoInput.value;
-    const nuevaCantidad = cantidadInput.value;
-    const nuevoPrecioCompra = precioCompraInput.value;
-    const nuevoPrecioVenta = precioVentaInput.value;
+  // Actualizar los valores de la celda seleccionada
+  celdaSeleccionada.innerText = producto;
+  celdaSeleccionada.nextElementSibling.innerText = cantidad;
+  celdaSeleccionada.nextElementSibling.nextElementSibling.innerText = precioCompra;
+  celdaSeleccionada.nextElementSibling.nextElementSibling.nextElementSibling.innerText = precioVenta;
+  celdaSeleccionada.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerText = categoria;
 
-    // Actualizar los valores del producto seleccionado
-    producto.producto = nuevoProducto;
-    producto.cantidad = nuevaCantidad;
-    producto.precioCompra = nuevoPrecioCompra;
-    producto.precioVenta = nuevoPrecioVenta;
-
-    // Lógica para guardar los cambios del producto
-    // Puedes implementar aquí la funcionalidad que necesites
-    // Por ejemplo, podrías hacer una solicitud al servidor para actualizar los datos en la base de datos
-
-    // Limpiar los campos del formulario
-    productoInput.value = '';
-    cantidadInput.value = '';
-    precioCompraInput.value = '';
-    precioVentaInput.value = '';
-
-    // Restaurar los botones de "Editar" y "Eliminar"
-    accionesContainer.innerHTML = '';
-    const editarBoton = document.createElement('button');
-    editarBoton.textContent = 'Editar';
-    editarBoton.addEventListener('click', () => {
-      editarProducto(producto);
-    });
-    accionesContainer.appendChild(editarBoton);
-
-    const eliminarBoton = document.createElement('button');
-    eliminarBoton.textContent = 'Eliminar';
-    eliminarBoton.addEventListener('click', () => {
-      // Realizar la lógica para eliminar el producto
-      const index = producto.detalleCompra.findIndex((detalle) => detalle._id === producto._id);
-      if (index !== -1) {
-        producto.detalleCompra.splice(index, 1);
-      }
-      // Puedes implementar aquí la funcionalidad adicional que necesites, como actualizar la base de datos
-
-      // Limpiar los campos del formulario
-      productoInput.value = '';
-      cantidadInput.value = '';
-      precioCompraInput.value = '';
-      precioVentaInput.value = '';
-
-      // Restaurar los botones de "Editar" y "Eliminar"
-      accionesContainer.innerHTML = '';
-      const editarBoton = document.createElement('button');
-      editarBoton.textContent = 'Editar';
-      editarBoton.addEventListener('click', () => {
-        editarProducto(producto);
-      });
-      accionesContainer.appendChild(editarBoton);
-    });
-
-    accionesContainer.appendChild(eliminarBoton);
-  });
-
-  accionesContainer.appendChild(guardarBoton);
+  // Limpiar los campos de edición después de guardar los cambios
+  document.getElementById("producto").value = "";
+  document.getElementById("cantidad").value = "";
+  document.getElementById("precioCompra").value = "";
+  document.getElementById("precioVenta").value = "";
+  document.getElementById("categoria").value = "";
 };
 
+const editarProducto = (producto) => {
+  // Obtener la fila que contiene la celda seleccionada
+  const fila = producto.parentNode.parentNode;
+
+  // Obtener la celda seleccionada
+  celdaSeleccionada = fila.firstChild;
+
+  // Obtener los valores de la celda seleccionada
+  const productoActual = celdaSeleccionada.innerText;
+  const cantidadActual = celdaSeleccionada.nextElementSibling.innerText;
+  const precioCompraActual = celdaSeleccionada.nextElementSibling.nextElementSibling.innerText;
+  const precioVentaActual = celdaSeleccionada.nextElementSibling.nextElementSibling.nextElementSibling.innerText;
+  const categoriaActual = celdaSeleccionada.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerText;
+
+  // Asignar los valores del producto seleccionado a los campos del formulario
+  document.getElementById('producto').value = productoActual;
+  document.getElementById('cantidad').value = cantidadActual;
+  document.getElementById('precioCompra').value = precioCompraActual;
+  document.getElementById('precioVenta').value = precioVentaActual;
+  document.getElementById('categoria').value = categoriaActual;
+};
 
 
 document.addEventListener("DOMContentLoaded", function () {

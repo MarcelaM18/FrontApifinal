@@ -5,7 +5,7 @@ const hbs = require('hbs');
 const cors = require('cors')
 
 
-const port = 8080;
+const port = 8081;
 // Configuración para habilitar CORS
 
 // Definición carpeta documentos estáticos
@@ -20,7 +20,7 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/public/views/partials');
 
 app.use(cors({
-    origin: 'http://localhost:8080',
+    origin: 'http://localhost:8081',
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: 'Content-Type',
   }));
@@ -131,7 +131,7 @@ app.get('/editarCategoria', (req, res) => {
     res.render('Categorias/editarCategoria', { 
         titulo : 'CosmeTIC',
         user_name : 'Marcela Morales', 
-        consecutivo: 'registroCategorias'
+        consecutivo: 'editarCategorias'
     });
 })
 
