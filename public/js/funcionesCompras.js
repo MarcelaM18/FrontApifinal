@@ -9,11 +9,10 @@ const validateForm = () => {
   const validatenumFacturaResult = validatenumFactura()
 
   
-    if ( validateproveedorResult && 
-      validateproductoResult && validateprecioCompraResult && validateprecioVentaResult && 
-      validatenumFacturaResult) {
-      registrar()
-    }
+      return validateproveedorResult,  
+      validateproductoResult, validateprecioCompraResult, validateprecioVentaResult ,
+      validatenumFacturaResult
+    
   }
   const validateproveedor = () => {
     let proveedor = document.getElementById('proveedor').value.trim();

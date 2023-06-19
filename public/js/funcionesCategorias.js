@@ -1,8 +1,16 @@
 const validateForm = () => {
   const validatecategoriaResult = validatecategoria();
 
+      
   console.log("validate categoria ", validatecategoriaResult);
+
+  return validatecategoriaResult;
+
+  
+
+
 };
+
 
 const validatecategoria = () => {
   let categoria = document.getElementById('nombrecat').value;
@@ -27,4 +35,3 @@ const validatecategoria = () => {
   }
 };
 
-validateForm();

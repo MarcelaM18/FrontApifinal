@@ -70,25 +70,32 @@ function registrar() {
     estado: _estado
   };
 
-  // Realizar la solicitud de registro
-  fetch(url, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(categoria),
-    headers: { "Content-type": "application/json; charset=UTF-8" }
-  })
-    .then((resp) => resp.json())
-    .then(json => {
-      if (json.msg) {
-        // Mensaje de éxito (opcional)
-        console.log(json.msg);
+  const validatecategoriaResult = validateForm();
+  if (validatecategoriaResult) {
+    // Realizar la solicitud de registro
+    fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(categoria),
+      headers: { "Content-type": "application/json; charset=UTF-8" }
+    })
+      .then((resp) => resp.json())
+      .then(json => {
+        if (json.msg) {
+          alert(json.msg);
+          // Mensaje de éxito (opcional)
+          console.log(json.msg);
 
-        // Redirigir después del registro exitoso
-        window.location.href = "/categorias";
-      }
-    });
+          // Redirigir después del registro exitoso
+          window.location.href = "/categorias";
+        }
+      })
+      .catch(error => {
+        console.error('Error en la solicitud de registro:', error);
+      });
+  }
 }
-// Declarar la variable url
+
 
 
 // Resto del código
@@ -125,6 +132,8 @@ const actualizar = () => {
     estado: _estado
   }
 console.log('estoy antes del fetch')
+const validatecategoriaResult = validateForm();
+  if (validatecategoriaResult) {
   fetch(url + `?id=${id}`, {
     method: 'PUT',
     mode: 'cors',
@@ -141,6 +150,8 @@ console.log('estoy antes del fetch')
       }
     })
 }
+}
+
 
 const eliminar = (id) => {
   if (confirm('¿Está seguro de realizar la eliminación?') == true) {

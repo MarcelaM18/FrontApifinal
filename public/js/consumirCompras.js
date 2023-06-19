@@ -1,6 +1,5 @@
 const url = 'http://localhost:8085/api/compra';
 
-
 const listarDatos = async () => {
   console.log('Estoy en el listar compra');
   let respuesta = '';
@@ -17,18 +16,20 @@ const listarDatos = async () => {
       console.log(listacompras);
       if (listacompras && Array.isArray(listacompras)) {
         respuesta = listacompras.map(function (compra, index) {
+          const fechaCompra = new Date(compra.fechaCompra).toLocaleDateString();
+          const fechaRegistro = new Date(compra.fechaRegistro).toLocaleDateString();
+
           return `<tr>
                     <td>${index + 1}</td>
                     <td>${compra.numFactura}</td>
                     <td>${compra.proveedor}</td>
-                    <td>${compra.fechaCompra}</td>
-                    <td>${compra.fechaRegistro}</td>
+                    <td>${fechaCompra}</td>
+                    <td>${fechaRegistro}</td>
                     <td>${compra.estado}</td>
                     <td>${compra.totalCompra}</td>
                     <td>
-                      <button><i class="bi bi-pencil-square"  onclick='editar(${JSON.stringify(compra)})' style="font-size: 24px;")"></i></button>
+                      <button><i class="bi bi-pencil-square" onclick='editar(${JSON.stringify(compra)})' style="font-size: 24px;"></i></button>
                       <button><a class="bi bi-trash3-fill" style="font-size: 24px;" href='#' onclick='eliminar("${compra._id}")'></a></button>
-
                     </td>
                   </tr>`;
         }).join('');
@@ -37,10 +38,9 @@ const listarDatos = async () => {
       }
 
       body.innerHTML = respuesta;
-
-
     });
 };
+
 
 
 
@@ -123,6 +123,9 @@ const  registrar =()=>{
     detalleCompra: detalleCompra,
     totalCompra: totalCompra
   };
+const validateCompras = validateForm()
+
+  if(validateCompras){
   fetch(url, {
     method: 'POST',
     mode: 'cors',
@@ -142,6 +145,7 @@ const  registrar =()=>{
     .catch(error => {
       console.error("Error en la solicitud de registro:", error);
     });
+  }
   }  
 
 

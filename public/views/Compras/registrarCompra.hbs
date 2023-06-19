@@ -8,205 +8,202 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-    <div class="wrapper" >
-       {{> navbar}}
-       <div class="content-wrapper" style="min-height: 909.40px;">
+    <div class="wrapper">
+        {{> navbar}}
+        <div class="content-wrapper" style="min-height: 1150px;" >
             <!-- Content Header (Page header) -->
-<section class="content">
-    <div class="container-fluid">
-        <!-- SELECT2 EXAMPLE -->
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">{{subtitulo}}</h3>
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- SELECT2 EXAMPLE -->
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">{{subtitulo}}</h3>
 
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="numFactura">Numero Factura</label>
+                                    <input type="nombre" class="form-control" id="numFactura" placeholder="Numero de factura" style="width: 100%;" />
+                                </div>
+                                <div class="textoF" id="textoF"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fechaCompra">Fecha Compra</label>
+                                        <input type="date" class="form-control" id="fechaCompra" placeholder="Fecha Compra" style="width: 100%;" />
+                                    </div>
+                                    <div class="textoc" id="textoc"></div>
+                                </div>
 
-                 <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="numFactura">Numero Factura</label>
-                            <input type="nombre" class="form-control" id="numFactura" placeholder="Numero de factura" style="width: 100%;" />
-                        </div>
-                        <div class="textoF" id="textoF"></div>
-                    </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="fechaCompra">Fecha Compra</label>
-                            <input type="date" class="form-control" id="fechaCompra" placeholder="Fecha Compra" style="width: 100%;" />
-                        </div>
-                        <div class="textoc" id="textoc"></div>
-                    </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fechaRegistro">Fecha Registro</label>
+                                        <input type="date" class="form-control" id="fechaRegistro" placeholder="Fecha Registro" style="width: 100%;" />
+                                    </div>
+                                    <div class="texto" id="texto"></div>
+                                </div>
+                                <!-- /.form-group -->
+                            </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="fechaRegistro">Fecha Registro</label>
-                            <input type="date" class="form-control" id="fechaRegistro" placeholder="Fecha Registro" style="width: 100%;" />
-                        </div>
-                        <div class="texto" id="texto"></div>
-                    </div>
-                    <!-- /.form-group -->
-                </div>
-
-                <!-- /.col -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="proveedor">Proveedor</label>
-                            <input type="proveedor" class="form-control" id="proveedor" placeholder="Digite el Proveedor" style="width: 100%;" />
-                        </div>
-                        <div class="texto2" id="texto2"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="estado" >Estado</label>
-                                         <select class="form-control select2bs4" style="width: 100%;"id="estado">
+                            <!-- /.col -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="proveedor">Proveedor</label>
+                                        <input type="proveedor" class="form-control" id="proveedor" placeholder="Digite el Proveedor" style="width: 100%;" />
+                                    </div>
+                                    <div class="texto2" id="texto2"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="estado">Estado</label>
+                                        <select class="form-control select2bs4" style="width: 100%;" id="estado">
                                             <option selected="selected">Elija el estado</option>
                                             <option value="true">Activo</option>
                                             <option value="false">Inactivo</option>
                                         </select>
-                        </div>
-                      
-                    </div>
-                    <!-- /.form-group -->
-            <div class="row"></div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="producto">Producto</label>
-                            <input type="producto" class="form-control" id="producto" placeholder="Digite el producto " style="width: 100%;" />
-                        </div>
-                        <div class="texto3" id="texto3"></div>
-                    </div>
-                    <!-- /.form-group -->
-                </div>
+                                    </div>
+                                </div>
+                                <!-- /.form-group -->
+                            </div>
+                            <div class="row"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="producto">Producto</label>
+                                    <input type="producto" class="form-control" id="producto" placeholder="Digite el producto " style="width: 100%;" />
+                                </div>
+                                <div class="texto3" id="texto3"></div>
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="row">
+                                <!-- /.col -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="categoria">Categoria</label>
+                                        <select class="form-control select2bs4" style="width: 100%;" id="categoria">
+                                            <option selected="selected">Elija una categoria</option>
+                                            <option>Belleza</option>
+                                            <option>limpieza</option>
+                                        </select>
+                                    </div>
+                                    <div class="texto4"></div>
+                                    <br />
+                                    <!-- /.form-group -->
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="precioCompra">Precio Compra</label>
+                                        <input type="precioCompra" class="form-control" id="precioCompra" placeholder="Digite su precio Compra" style="width: 100%;" />
+                                    </div>
+                                    <!-- /.form-group -->
+                                    <div class="texto5" id="texto5"></div>
+                                </div>
+                            </div>
 
-                <div class="row">
-                    <!-- /.col -->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="categoria">Categoria</label>
-                            <select class="form-control select2bs4" style="width: 100%;" id="categoria">
-                                <option selected="selected">Elija una categoria</option>
-                                <option>Belleza</option>
-                                <option>limpieza</option>
-                            </select>
-                        </div>
-                        <div class="texto4" ></div>
-                        <br />
-                        <!-- /.form-group -->
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="precioCompra">Precio Compra</label>
-                            <input type="precioCompra" class="form-control" id="precioCompra" placeholder="Digite su precio Compra" style="width: 100%;" />
-                        </div>
-                        <!-- /.form-group -->
-                        <div class="texto5" id="texto5"></div>
-                    </div>
-                </div>
+                            <!-- /.col -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="precioVenta">Precio Venta</label>
+                                        <input type="precioVenta" class="form-control" id="precioVenta" placeholder="Digite su precio Venta" style="width: 100%;" />
+                                    </div>
+                                    <div class="texto7" id="texto7"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cantidad">Cantidad</label>
+                                        <input type="cantidad" class="form-control" id="cantidad" placeholder="Digite la cantidad" style="width: 100%;" />
+                                    </div>
+                                    <div class="texto8" id="texto8"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="observaciones">Observaciones</label>
+                                        <input type="observaciones" class="form-control" id="observaciones" placeholder="Observaciones" style="width: 100%;" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="totalCompra">Total Compra</label>
+                                        <input type="totalCompra" class="form-control" id="totalCompra" placeholder="Digite su precio Compra" style="width: 100%;" />
+                                    </div>
+                                    <div class="texto6" id="texto6"></div>
+                                </div>
+                            </div>
 
-                <!-- /.col -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="precioVenta">Precio Venta</label>
-                            <input type="precioVenta" class="form-control" id="precioVenta" placeholder="Digite su precio Venta" style="width: 100%;" />
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="sendbtn btn btn-success" id="registrarProducto" type="button" value="Registrar Producto" onclick="agregarProducto()">
+                                </div>
+                            </div>
                         </div>
-                        <div class="texto7" id="texto7"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="cantidad">Cantidad</label>
-                            <input type="cantidad" class="form-control" id="cantidad" placeholder="Digite la cantidad" style="width: 100%;" />
-                        </div>
-                        <div class="texto8" id="texto8"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="observaciones">Observaciones</label>
-                            <input type="observaciones" class="form-control" id="observaciones" placeholder="Observaciones" style="width: 100%;" />
-                        </div>
-                        
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="totalCompra">Total Compra</label>
-                            <input type="totalCompra" class="form-control" id="totalCompra" placeholder="Digite su precio Compra" style="width: 100%;" />
-                        </div>
-                        <div class="texto6" id="texto6"></div>
                     </div>
                 </div>
+            </section>
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- SELECT2 EXAMPLE -->
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">{{subtitulo}}</h3>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <input class="sendbtn btn btn-success" id="registrarProducto" type="button" value="Registrar Producto" onclick="agregarProducto()" >
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!--tabla donde se van a ir agregando los productos de la compra -->
+                            <table id="detalleTabla" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio Compra</th>
+                                        <th>Precio Venta</th>
+                                        <th>Categoria</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="detalleProductos">
+                                </tbody>
+                            </table>
+                            <br><br>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="sendbtn btn btn-success" id="#btnRegistrar" type="button" value="Registrar" onclick="registrar()">
+                                    <button class="sendbtn btn btn-danger" id="cancelar">Cancelar</button>
+                                    <script>
+                                        document.getElementById('cancelar').addEventListener('click', function() {
+                                            window.location.href = '/compras'; // Reemplaza '/compras' con la URL de la lista de compras
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
+            <!-- /.content -->
         </div>
-    </div>
-</section>
-<section class="content">
-    <div class="container-fluid">
-        <!-- SELECT2 EXAMPLE -->
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">{{subtitulo}}</h3>
+        <!-- /.content-wrapper -->
 
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <!--tabla donde se van a ir agregando los productos de la compra -->
-                <table id="detalleTabla" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Precio Compra</th>
-                            <th>Precio Venta</th>
-                            <th>Categoria</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detalleProductos">
-                    </tbody>
-                  
-                
-                </table>
-                  <br><br>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <input class="sendbtn btn btn-success" id="#btnRegistrar" type="button" value="Registrar" onclick="registrar()" >
-                        <input class="sendbtn btn btn-danger" id="cancelar" type="button" value="Cancelar">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</section>
-
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    
-    {{> footer}}
+        {{> footer}}
     </div>
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -215,10 +212,11 @@
     <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-<script src="../../js/funcionesCompras.js"></script>
-<script src="../../js/consumirCompras.js"></script>
+
+    <script src="../../js/funcionesCompras.js"></script>
+    <script src="../../js/consumirCompras.js"></script>
     <!-- jQuery -->
-    <script src="/plugins/jquery/jquery.min.js"></scri>
+    <script src="/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables  & Plugins -->
@@ -241,22 +239,15 @@
     <script src="/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        $(function () {
-            $("#example1").DataTable({
+        $(function() {
+            $("#detalleTabla").DataTable({
                 "responsive": true,
-                "lengthChange": false, "autoWidth": false, "buttons": ["copy", "csv",
-                    "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true, "lengthChange": false,
-                "searching": false, "ordering": true, "info": true, "autoWidth": false,
-                "responsive": true,
-            });
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            }).buttons().container().appendTo('#detalleTabla_wrapper .col-md-6:eq(0)');
         });
-
-      
     </script>
-    
 </body>
 
 </html>
