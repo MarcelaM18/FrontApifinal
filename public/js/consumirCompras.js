@@ -1,4 +1,4 @@
-const url = 'http://localhost:8085/api/compra';
+const url = 'https://backendapifinal.onrender.com/api/compra';
 
 const listarDatos = async () => {
   console.log('Estoy en el listar compra');

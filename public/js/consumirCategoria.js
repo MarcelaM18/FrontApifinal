@@ -1,4 +1,4 @@
-const url = 'http://localhost:8085/api/categoria';
+const url = 'https://backendapifinal.onrender.com/api/categoria';
 
 const listarDatos = async () => {
   console.log('Estoy en el listar');
