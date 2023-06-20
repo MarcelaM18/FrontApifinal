@@ -20,6 +20,7 @@ const listarDatos = async () => {
                     <td>${index + 1}</td>
                     <td>${categoria.nombre}</td>
                     <td>${categoria.estado}</td>
+                    <td>${categoria.observacion}</td>
                     <td>
                       <button><i class="bi bi-pencil-square" style="font-size: 24px;" onclick='editar(${JSON.stringify(categoria)})'></i></button>
                       <button><a class="bi bi-trash3-fill" style="font-size: 24px;" href='#' onclick='eliminar("${categoria._id}")'></a></button>
@@ -34,30 +35,6 @@ const listarDatos = async () => {
     });
 };
 
-const listarDatos1 = async () => {
-  let respuesta = '';
-  let body = document.getElementById('contenido');
-
-  fetch(url, {
-    method: 'GET',
-    mode: 'cors',
-    headers: { "Content-type": "application/json; charset=UTF-8" }
-  })
-    .then((resp) => resp.json())
-    .then(function (data) {rDatos();
-      let listacategorias = data.categorias;
-      datos = listacategorias.map(function (categoria) {
-        respuesta += `<tr><td>${categoria.cedula}</td>` +
-          `<td>${categoria.nombre}</td>` +
-          `<td>${categoria.estado == "true" ? 'activo': 'inactivo' }</td>` +
-          `<td><a class="fa-solid fa-pen-to-square"  onclick='editar(${JSON.stringify(categoria)})' ></a> 
-         <a class="fa-solid fa-toggle-on" href='#' onclick='eliminar("${categoria._id}")'></a></td>` +
-          `</tr>`;
-        body.innerHTML = respuesta;
-      });
-
-    });
-};
 
 function registrar() {
   // Obtener los valores de los campos
@@ -68,6 +45,7 @@ function registrar() {
   let categoria = {
     nombre: _nombrecat,
     estado: _estado
+    observacion: observacion
   };
 
   const validatecategoriaResult = validateForm();
@@ -118,6 +96,7 @@ const consultarCategoria = (categoria) => {
       document.getElementById('id').value = categoria._id
       document.getElementById('nombrecat').value = categoria.nombre
       document.getElementById('estado').value = categoria.estado
+      document.getElementById('observacion').value = categoria.observacion
     })
 }
 
@@ -130,6 +109,7 @@ const actualizar = () => {
   let categoria = {
     nombre: _nombre,
     estado: _estado
+    observacion: observacion
   }
 console.log('estoy antes del fetch')
 const validatecategoriaResult = validateForm();
