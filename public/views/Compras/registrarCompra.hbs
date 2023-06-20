@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {{> header}}
     <title>{{titulo}}</title>
+     <script>
+        $(function() {
+            $("#detalleTabla").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            }).buttons().container().appendTo('#detalleTabla_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+     <script src="../../js/funcionesCompras.js"></script>
+    <script src="../../js/consumirCompras.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -169,7 +181,7 @@
                         </div>
                         <div class="card-body">
                             <!--tabla donde se van a ir agregando los productos de la compra -->
-                            <table id="detalleTabla" >
+                            <table id="detalleTabla" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Producto</th>
@@ -213,8 +225,7 @@
     </div>
     <!-- ./wrapper -->
 
-    <script src="../../js/funcionesCompras.js"></script>
-    <script src="../../js/consumirCompras.js"></script>
+   
     <!-- jQuery -->
     <script src="/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -238,7 +249,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="/js/demo.js"></script>
     <!-- Page specific script -->
-
+   
 </body>
 
 </html>

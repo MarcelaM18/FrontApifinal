@@ -81,15 +81,14 @@ function eliminarProducto(btn) {
 }
 
 // Función para registrar una compra
-const  registrar =()=>{
-  console.log('Estoy en registar Compra')
+// Función para registrar una compra
+const registrar = () => {
+  console.log('Estoy en registrar Compra');
   var proveedor = document.getElementById('proveedor').value;
   var numFactura = document.getElementById('numFactura').value;
   var fechaCompra = document.getElementById('fechaCompra').value;
   var fechaRegistro = document.getElementById('fechaRegistro').value;
   var estado = document.getElementById('estado').value; // Puedes ajustar el valor del estado según tus necesidades
-  var estado = document.getElementById('cantidad').value;
-
 
   var detalleCompra = [];
   var tablaDetalle = document.getElementById('detalleTabla');
@@ -97,7 +96,7 @@ const  registrar =()=>{
   for (var i = 0; i < filas.length; i++) {
     var celdas = filas[i].getElementsByTagName('td');
     var producto = celdas[0].innerHTML;
-    var cantidad = parseInt(celdas[1].innerHTML)
+    var cantidad = parseInt(celdas[1].innerHTML);
     var precioCompra = parseFloat(celdas[2].innerHTML);
     var precioVenta = parseFloat(celdas[3].innerHTML);
     var categoria = celdas[4].innerHTML;
@@ -125,31 +124,32 @@ const  registrar =()=>{
     detalleCompra: detalleCompra,
     totalCompra: totalCompra
   };
-const validateCompras = validateForm()
 
-  if(validateCompras){
-  fetch(url, {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(compra),
-    headers: { "Content-type": "application/json; charset=UTF-8" }
-  })
-    .then((resp) => resp.json())
-    .then(json => {
-      if (json.msg) {
-        alert(json.msg)
-        // Mensaje de éxito (opcional)
-        console.log(json.msg);
-  
-        // Redirigir después del registro exitoso
-        window.location.href = "/compras";
-      }
+  const validateCompras = validateForm();
+
+  if (validateCompras) {
+    fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(compra),
+      headers: { "Content-type": "application/json; charset=UTF-8" }
     })
-    .catch(error => {
-      console.error("Error en la solicitud de registro:", error);
-    });
+      .then((resp) => resp.json())
+      .then(json => {
+        if (json.msg) {
+          alert(json.msg);
+          // Mensaje de éxito (opcional)
+          console.log(json.msg);
+  
+          // Redirigir después del registro exitoso
+          window.location.href = "/compras";
+        }
+      })
+      .catch(error => {
+        console.error("Error en la solicitud de registro:", error);
+      });
   }
-  }  
+};
 
 
 
