@@ -137,6 +137,7 @@ const validateCompras = validateForm()
     .then((resp) => resp.json())
     .then(json => {
       if (json.msg) {
+        alert(json.msg)
         // Mensaje de éxito (opcional)
         console.log(json.msg);
   
