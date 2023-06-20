@@ -88,6 +88,8 @@ const  registrar =()=>{
   var fechaCompra = document.getElementById('fechaCompra').value;
   var fechaRegistro = document.getElementById('fechaRegistro').value;
   var estado = document.getElementById('estado').value; // Puedes ajustar el valor del estado según tus necesidades
+  var estado = document.getElementById('cantidad').value;
+
 
   var detalleCompra = [];
   var tablaDetalle = document.getElementById('detalleTabla');
@@ -95,7 +97,7 @@ const  registrar =()=>{
   for (var i = 0; i < filas.length; i++) {
     var celdas = filas[i].getElementsByTagName('td');
     var producto = celdas[0].innerHTML;
-    var cantidad = parseInt(celdas[1].innerHTML); // Convertir a número entero
+    var cantidad = parseInt(celdas[1].innerHTML)
     var precioCompra = parseFloat(celdas[2].innerHTML);
     var precioVenta = parseFloat(celdas[3].innerHTML);
     var categoria = celdas[4].innerHTML;
