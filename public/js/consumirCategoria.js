@@ -40,12 +40,13 @@ function registrar() {
   // Obtener los valores de los campos
   let _nombrecat = document.getElementById('nombrecat').value;
   let _estado = document.getElementById('estado').value;
+  let _observacion = document.getElementById('observacion').value;
 
   // Crear el objeto categoria
   let categoria = {
     nombre: _nombrecat,
-    estado: _estado
-    observacion: observacion
+    estado: _estado,
+    observacion: _observacion
   };
 
   const validatecategoriaResult = validateForm();
@@ -105,11 +106,12 @@ const actualizar = () => {
   let id = document.getElementById('id').value
   let _nombre = document.getElementById('nombrecat').value
   let _estado = document.getElementById('estado').value
+  let _observacion = document.getElementById('observac_observacion').value
 
   let categoria = {
     nombre: _nombre,
-    estado: _estado
-    observacion: observacion
+    estado: _estado,
+    observacion: _observacion
   }
 console.log('estoy antes del fetch')
 const validatecategoriaResult = validateForm();
